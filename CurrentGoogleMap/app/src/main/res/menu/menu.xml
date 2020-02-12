@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_location"
+        android:icon="@mipmap/ic_launcher_peoplecurrentmap"
+        android:title="Vị Trí Hiện Tại"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/mapbinhthuong"
+        android:title="map bình thường"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/maplai"
+        android:title="bản đồ lai"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/mapvetinh"
+        android:title="bản đồ vệ tinh"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/mapdiahinh"
+        android:title="bản đồ địa hình"
+        app:showAsAction="never"/>
+
+</menu>
