@@ -16,6 +16,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -56,7 +57,7 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
 
 
     private static  final int REQUEST_LOCATION=1;
-
+    private final Handler handler = new Handler();
     LocationManager locationManager;
     String latitude,longitude;
     com.google.android.gms.maps.GoogleMap map;
@@ -73,6 +74,35 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_map);
 
+        //ham addEvent thuc hien công việc chính
+        addEvent();
+
+        //Refresh();
+
+
+
+
+
+
+    }
+
+    private void Refresh() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Write code for your refresh logic
+                doTheAutoRefresh();
+            }
+
+            private void doTheAutoRefresh() {
+                addEvent();
+                Toast.makeText(GoogleMap.this,"Loading after 5 minute !",Toast.LENGTH_SHORT).show();
+            }
+        }, 300000);
+
+    }
+
+    private void addEvent() {
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.googlemap);
 
@@ -83,14 +113,14 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
 
         mQueue = Volley.newRequestQueue(GoogleMap.this);
 
+        //cap nhat vi tri hien tai cua User
+        CapNhatViTri();
+
         //Dọc du lieu tu website
         Doc();
 
         //tim dia diem qua searchView
         Search();
-
-        //cap nhat vi tri hien tai cua User
-        CapNhatViTri();
     }
 
     private void CapNhatViTri() {
@@ -336,15 +366,6 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
                                 }
 
 
-//                                InfoUser sim808 = sim808s.get(sim808s.size()-1);
-//
-//                                ViDo = Float.parseFloat(sim808.getViDo());
-//                                KinhDo = Float.parseFloat(sim808.getKinhDo());
-//                                // Toast.makeText(MainActivity.this,ViDo+" "+KinhDo,Toast.LENGTH_LONG).show();
-//
-//                                LatLng latLng = new LatLng(ViDo,KinhDo);
-//                                map.addMarker(new MarkerOptions().position(latLng).title("vi tri IOT"));
-//                                map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -407,9 +428,47 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
                     map.addMarker(new MarkerOptions().position(latLng).title("vị trí của ban !").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
                 }
-//                LatLng latLng = new LatLng(toadoLat,toadoLong);
-//                map.addMarker(new MarkerOptions().position(latLng).title("vitritam").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-//                map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+                return true;
+            case R.id.action_refresh:
+                handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // Write code for your refresh logic
+                    doTheAutoRefresh();
+                }
+
+                private void doTheAutoRefresh() {
+
+//                    //remove arraylist
+//                    sim808s.clear();
+//
+//                    //Toast.makeText(GoogleMap.this,"da load sau 1s",Toast.LENGTH_SHORT).show();
+//                    mapFragment = (SupportMapFragment) getSupportFragmentManager()
+//                            .findFragmentById(R.id.googlemap);
+//
+//
+//
+//                    searchView = findViewById(R.id.sv_location);
+//
+//
+//                    mQueue = Volley.newRequestQueue(GoogleMap.this);
+//
+//                    //cap nhat vi tri hien tai cua User
+//                    CapNhatViTri();
+//
+//
+//                    //Dọc du lieu tu website
+//                    Doc();
+//
+//                    //tim dia diem qua searchView
+//                    Search();
+
+                    Intent intent = new Intent(GoogleMap.this,MainActivity.class);
+                    startActivity(intent);
+
+
+                }
+            }, 500);
                 return true;
         }
 
