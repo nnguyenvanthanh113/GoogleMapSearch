@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/mapbinhthuong"
+        android:title="map bình thường"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/maplai"
+        android:title="bản đồ lai"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/mapvetinh"
+        android:title="bản đồ vệ tinh"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/mapdiahinh"
+        android:title="bản đồ địa hình"
+        app:showAsAction="never"/>
+</menu>
